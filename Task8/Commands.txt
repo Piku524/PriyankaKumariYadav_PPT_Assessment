@@ -1,0 +1,24 @@
+Task 8: Create IAM Users and Groups - Command Reference
+
+Step 1: Navigate to IAM in AWS Console
+
+Step 2: Create Group
+Go to Groups → Create Group
+Group Name: Developers
+Attach Policy: AdministratorAccess
+Click Create Group
+
+Step 3: Create Users
+Go to Users → Add User
+User Name: priyanka
+Select AWS Management Console Access
+Set password → Next: Permissions
+Add User to Group → Select Developers
+Click Create User
+Save credentials if programmatic access enabled
+
+Step 4: Attach Additional Policies
+Users → Select User → Permissions → Add permissions → Attach policies directly → Select Policy → Add permissions
+
+Step 5: Verify Access
+Login with new user credentials to confirm permissions

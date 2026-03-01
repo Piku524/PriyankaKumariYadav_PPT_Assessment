@@ -1,0 +1,137 @@
+Task 3: Attach EBS Volume from Different AZ using Snapshot
+
+Objective:
+Create snapshot of an EBS volume and restore it in a different Availability Zone, then attach it to another EC2 instance.
+
+Step 1: Launch Source EC2 Instance (AZ-1)
+
+Open AWS Console
+
+Go to EC2 service
+
+Click Launch Instance
+
+Name: Source-EC2
+
+AMI: Amazon Linux 2023
+
+Instance type: t2.micro
+
+Availability Zone: us-east-1a
+
+Create or select key pair
+
+Launch instance
+
+Step 2: Create and Attach EBS Volume to Source EC2
+
+Go to EC2 → Volumes
+
+Click Create Volume
+
+Size: 5 GB
+
+Availability Zone: us-east-1a
+
+Click Create Volume
+
+Attach volume:
+
+Select the volume
+
+Click Actions → Attach Volume
+
+Instance: Source-EC2
+
+Device name: /dev/xvdf
+
+Click Attach
+
+Step 3: Connect to Source EC2 and Mount Volume
+
+Run these commands on Source EC2:
+
+lsblk
+sudo file -s /dev/nvme1n1
+sudo mkfs -t ext4 /dev/nvme1n1
+sudo mkdir /data
+sudo mount /dev/nvme1n1 /data
+
+Create a test file:
+
+echo "Hello Snapshot" | sudo tee /data/test.txt
+cat /data/test.txt
+
+Step 4: Create Snapshot of the Volume
+
+Go to EC2 → Volumes
+
+Select the attached volume
+
+Click Actions → Create Snapshot
+
+Name: Task3-Snapshot
+
+Click Create Snapshot
+
+Wait until snapshot status becomes Completed
+
+Step 5: Launch Target EC2 Instance in Different AZ (AZ-2)
+
+Go to EC2 → Launch Instance
+
+Name: Target-EC2
+
+AMI: Amazon Linux 2023
+
+Instance type: t2.micro
+
+Availability Zone: us-east-1b
+
+Launch instance
+
+Step 6: Create New Volume from Snapshot in AZ-2
+
+Go to EC2 → Snapshots
+
+Select Task3-Snapshot
+
+Click Actions → Create Volume
+
+Availability Zone: us-east-1b
+
+Click Create Volume
+
+Step 7: Attach New Volume to Target EC2
+
+Go to EC2 → Volumes
+
+Select newly created volume
+
+Click Actions → Attach Volume
+
+Instance: Target-EC2
+
+Device name: /dev/xvdf
+
+Click Attach
+
+Step 8: Mount Volume on Target EC2 and Verify Data
+
+Run these commands on Target EC2:
+
+lsblk
+sudo file -s /dev/nvme1n1
+sudo mkdir /data
+sudo mount /dev/nvme1n1 /data
+
+Verify snapshot data:
+
+cat /data/test.txt
+
+Expected output:
+Hello Snapshot
+
+Step 9: Task Completed
+
+Data from Source EC2 volume is successfully restored to Target EC2 using snapshot across different Availability Zones.

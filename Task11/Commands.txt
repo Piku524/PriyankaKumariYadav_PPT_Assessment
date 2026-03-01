@@ -1,0 +1,33 @@
+Task 11: S3 Upload Email Notification (Lambda + SNS)
+
+Step 1: Create IAM Role
+1. Go to IAM → Roles → Create Role
+2. Choose AWS service → Lambda → Next
+3. Name: LambdaSNSRole
+4. Attach policies: AWSLambdaBasicExecutionRole, AmazonSNSFullAccess
+5. Create Role
+
+Step 2: Create Lambda Function
+1. Go to Lambda → Create Function → Author from scratch
+2. Function name: S3UploadNotifier
+3. Runtime: Python 3.11
+4. Execution role: Choose existing role → LambdaSNSRole
+5. Create Function
+
+Step 3: Add S3 Trigger
+1. Open Lambda function → Add Trigger → S3
+2. Choose bucket: my-upload-bucket
+3. Event type: All object create events
+4. Enable trigger → Add
+
+Step 4: Create SNS Topic and Add Destination
+1. Go to SNS → Topics → Create topic → Standard
+2. Name: S3UploadNotification → Create
+3. Open topic → Create subscription
+4. Protocol: Email → Endpoint: your email
+5. Confirm subscription from email
+6. Copy Topic ARN → Add in Lambda configuration
+
+Step 5: Test
+1. Go to S3 bucket → Upload file (e.g., testfile.txt)
+2. Check email → Notification should arrive

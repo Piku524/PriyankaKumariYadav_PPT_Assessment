@@ -1,0 +1,13 @@
+sudo apt update
+sudo apt install nginx -y
+cd /
+ls
+cd var
+cd www
+ls
+cd ~
+wget -O file.zip https://www.tooplate.com/download/2145_eco_lume
+sudo apt install unzip
+unzip file.zip
+sudo cp -r 2145_eco_lume/* /var/www/html/
+ls

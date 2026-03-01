@@ -1,0 +1,8 @@
+Task 24: SLA, Service Lifecycle & Subscription Management
+Objective: Understand subscription and SLA
+
+Step 1: Search 'Subscriptions' → Open active subscription
+Step 2: Review Subscription Overview (billing, quotas, region)
+Step 3: Go to 'Help + Support' → Search 'SLA'
+Step 4: Read SLA for Virtual Machines and Storage
+Step 5: Open 'Service Health' → Check current resource health

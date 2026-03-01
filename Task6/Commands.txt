@@ -1,0 +1,31 @@
+Task 6: S3 Replication and Lifecycle Policy
+
+Step 1: Create Source and Destination Buckets
+Open AWS Console → S3
+Click "Create bucket" → Enter name (source bucket) → Create bucket
+Click "Create bucket" → Enter name (destination bucket) → Create bucket
+
+Step 2: Enable Versioning on Source and Destination
+Open Source Bucket → Properties → Enable Versioning → Save
+Open Destination Bucket → Properties → Enable Versioning → Save
+
+Step 3: Configure Replication
+Open Source Bucket → Management → Replication → Create rule
+Rule ID: Rule 1
+Status: Enabled
+Scope: Apply to all objects
+Destination Bucket: Select bucket or paste ARN
+IAM Role: Create new role (required for permissions)
+Click Submit
+Job is created → Configure job settings → Save
+
+Step 4: Configure Lifecycle Rule
+Open Source Bucket → Management → Lifecycle rules → Create lifecycle rule
+Rule Name: Lifecycle 1
+Scope: Apply to all objects
+Lifecycle rule actions: Configure as needed (e.g., transition to IA, delete after X days)
+Click Save
+
+Step 5: Verification
+Make changes in Source Bucket → Verify objects replicate to Destination Bucket
+Check Lifecycle actions happen as configured

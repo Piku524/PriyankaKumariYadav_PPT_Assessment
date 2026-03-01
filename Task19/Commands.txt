@@ -1,0 +1,17 @@
+
+Task 19: Azure Storage Account (Blob, File, Table)
+Objective: Create storage account and explore storage types
+
+Step 1: Login to Azure Portal
+Step 2: Search 'Storage Accounts' → Click Create
+Step 3: Select Resource Group: ppt-rg
+Step 4: Enter Storage Account Name: pptstorage123 (must be unique)
+Step 5: Select Region → Keep default performance and replication → Review + Create → Create
+
+Step 6: Access Storage Account
+Click 'Containers' → Create new container → Name: container1 → Access Level: Private
+Upload a sample file (Blob Storage)
+Explore File Shares:
+   - Click 'File Shares' → Create new file share → Upload files
+Explore Tables:
+   - Click 'Tables' → Create new table → Explore data

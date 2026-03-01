@@ -1,0 +1,14 @@
+Task 21: Microsoft Entra ID (Users & Roles)
+Objective: Add users and assign roles
+
+Step 1: Search 'Microsoft Entra ID' → Open Dashboard
+Step 2: Click 'Users' → New User → Create new user
+Step 3: Enter:
+   - Name: Example User
+   - Username: exampleuser@domain.com
+   - Other basic details → Click Create
+Step 4: Assign Role:
+   - Go to 'Roles and Administrators'
+   - Select role: Reader
+   - Assign to newly created user
+Step 5: Verify user and role assignment
