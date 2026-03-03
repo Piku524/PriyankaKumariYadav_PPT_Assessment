@@ -1,0 +1,15 @@
+Step 1: Open AWS Console → DynamoDB → Tables → Create Table
+Step 2: Set Table Name: DynamoDB
+Step 3: Set Partition Key: UID (Number)
+Step 4: Set Sort Key: OID (Number)
+Step 5: Leave other settings default → Click Create Table
+Step 6: Go to Explore Table → Items → Create Item
+Step 7: Add sample item:
+
+UID: 101
+OID: 001
+Item1: Burger
+Item2: Coke
+
+Step 8: Click Save
+Step 9: Use Search / Query to retrieve item using UID = 101 and OID = 001

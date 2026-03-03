@@ -1,0 +1,12 @@
+Task 22: Azure Monitoring & Diagnostics
+Objective: Monitor resource metrics and activity
+
+Step 1: Search 'Azure Monitor' → Open Dashboard
+Step 2: Click 'Metrics'
+Step 3: Select a resource (VM or Storage Account)
+Step 4: Explore Metrics:
+   - CPU Usage
+   - Disk Read/Write
+   - Network In/Out
+Step 5: Go to 'Activity Log' → Check recent activities
+Step 6: Explore 'Alerts' section (basic overview)

@@ -1,0 +1,25 @@
+Task 9: Access S3 from Ubuntu using IAM Roles & Policies
+
+Step 1: Create IAM Policy
+IAM → Policies → Create policy
+Allow all actions on all resources
+Next → Policy name: S3FullAccessPolicy → Create policy
+
+Step 2: Create IAM Role
+IAM → Roles → Create role
+AWS service → EC2
+Next → Attach policy: S3FullAccessPolicy
+Role name: S3AccessRole → Create role
+
+Step 3: Launch EC2 Instance (Ubuntu)
+EC2 → Launch Instance → Ubuntu AMI
+Select instance type → Configure instance → Add IAM Role: S3AccessRole
+Launch instance → Connect via SSH
+
+Step 4: Test AWS CLI & S3 Access
+aws --version
+aws s3 ls
+echo "Hello S3" > testfile.txt
+aws s3 cp testfile.txt s3://your-bucket-name/
+aws s3 ls s3://your-bucket-name/
+

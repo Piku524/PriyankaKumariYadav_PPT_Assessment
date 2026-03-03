@@ -1,0 +1,69 @@
+Task 7: Create EFS and Mount on Multiple Ubuntu Instances
+
+Step 1: Create EFS File System
+
+Open AWS Console → EFS → Create file system
+
+Name: MyEFS
+
+File system type: Regional 
+
+Enable automatic backups
+
+Enable lifecycle management (optional)
+
+Enable encryption at rest
+
+Performance mode: General Purpose (Enhanced Elastic)
+
+Network: Default VPC, select subnets, allow NFS traffic
+
+Click "Create file system"
+
+Step 2: Launch Multiple Ubuntu EC2 Instances
+
+Launch 2 or more Ubuntu instances in the same VPC
+
+Security group: allow SSH (22) and NFS (TCP 2049)
+
+Connect to each instance via SSH
+
+Step 3: Ubuntu Instance A Setup
+
+sudo apt update
+
+sudo apt install nfs-common -y
+
+sudo mkdir /mnt/my_mount
+
+Mount EFS: sudo mount -t nfs4 <EFS-DNS>:/ /mnt/my_mount
+
+cd /mnt/my_mount
+
+sudo nano a.txt → write some content and save
+
+Verify mount: ls -l
+
+Step 4: Ubuntu Instance B Setup
+
+sudo apt update
+
+sudo apt install nfs-common -y
+
+sudo mkdir /mnt/your_mount
+
+Mount EFS: sudo mount -t nfs4 <EFS-DNS>:/ /mnt/your_mount
+
+cd /mnt/your_mount
+
+Verify mount: ls -l
+
+Access file from Instance A: cat a.txt
+
+Create/edit file: sudo nano b.txt → write some content
+
+Step 5: Verify Shared Storage
+
+On Instance A: cat /mnt/my_mount/b.txt → should show content from Instance B
+
+On Instance B: cat /mnt/your_mount/a.txt → should show content from Instance A

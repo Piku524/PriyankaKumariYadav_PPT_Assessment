@@ -1,0 +1,23 @@
+Task 18: Azure Virtual Machine (Easy Task)
+Objective: Launch and configure a basic Azure VM
+
+Step 1: Login to Azure Portal
+Open https://portal.azure.com and login with your account
+
+Step 2: Create Resource Group
+Search 'Resource Groups' → Click Create → Name: ppt-rg → Review + Create → Create
+
+Step 3: Create Virtual Machine
+Search 'Virtual Machines' → Click Create → Azure Virtual Machine
+Enter VM Name: ppt-vm
+Select Resource Group: ppt-rg
+Choose Image: Ubuntu Server 22.04 LTS or Windows Server 2022
+Select Size: Standard B1s (or default sandbox size)
+Set Authentication: Username + Password OR SSH Key
+Review + Create → Create
+
+Step 4: Verify VM
+Open VM Dashboard → Check Status: Running
+Access VM:
+   - If Linux: ssh username@VM_Public_IP
+   - If Windows: Connect via RDP using username/password

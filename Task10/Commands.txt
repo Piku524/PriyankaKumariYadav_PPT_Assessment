@@ -1,0 +1,52 @@
+Task 10:
+
+Steps:
+
+aws ec2 create-vpc --cidr-block 10.0.0.0/24
+
+aws ec2 create-internet-gateway
+
+aws ec2 attach-internet-gateway --vpc-id <VPC-ID> --internet-gateway-id <IGW-ID>
+
+aws ec2 create-subnet --vpc-id <VPC-ID> --cidr-block 10.0.0.0/27 --availability-zone <AZ>
+
+aws ec2 create-subnet --vpc-id <VPC-ID> --cidr-block 10.0.0.32/27 --availability-zone <AZ>
+
+aws ec2 create-subnet --vpc-id <VPC-ID> --cidr-block 10.0.0.64/26 --availability-zone <AZ>
+
+aws ec2 create-route-table --vpc-id <VPC-ID>
+
+aws ec2 create-route --route-table-id <PUBLIC-RT-ID> --destination-cidr-block 0.0.0.0/0 --gateway-id <IGW-ID>
+
+aws ec2 associate-route-table --subnet-id <PUBLIC-SUBNET-ID> --route-table-id <PUBLIC-RT-ID>
+
+aws ec2 allocate-address --domain vpc
+
+aws ec2 create-nat-gateway --subnet-id <PUBLIC-SUBNET-ID> --allocation-id <EIP-ALLOC-ID>
+
+aws ec2 create-route-table --vpc-id <VPC-ID>
+
+aws ec2 create-route --route-table-id <PRIVATE-RT-ID> --destination-cidr-block 0.0.0.0/0 --nat-gateway-id <NAT-ID>
+
+aws ec2 associate-route-table --subnet-id <PRIVATE-APP-SUBNET-ID> --route-table-id <PRIVATE-RT-ID>
+
+aws ec2 associate-route-table --subnet-id <PRIVATE-DB-SUBNET-ID> --route-table-id <PRIVATE-RT-ID>
+
+aws ec2 create-network-acl --vpc-id <VPC-ID>
+
+aws ec2 create-network-acl-entry --network-acl-id <NACL-ID> --rule-number 100 --protocol tcp --port-range From=22,To=22 --cidr-block 10.0.0.0/24 --rule-action allow --egress false
+
+aws ec2 create-network-acl-entry --network-acl-id <NACL-ID> --rule-number 100 --protocol -1 --cidr-block 0.0.0.0/0 --rule-action allow --egress true
+
+aws ec2 associate-network-acl --network-acl-id <NACL-ID> --subnet-id <PRIVATE-APP-SUBNET-ID>
+
+aws ec2 associate-network-acl --network-acl-id <NACL-ID> --subnet-id <PRIVATE-DB-SUBNET-ID>
+
+nano Mikey.pem
+
+chmod 400 Mikey.pem
+
+ssh -i "Mikey.pem" ubuntu@<PUBLIC-IP>
+
+ssh -i "Mikey.pem" ubuntu@<PRIVATE-IP>
+

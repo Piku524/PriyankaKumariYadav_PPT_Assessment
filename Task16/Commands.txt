@@ -1,0 +1,18 @@
+Task 16: RDS SQL Workbench Commands
+
+Step 1: Launch RDS instance in AWS
+Step 2: Select MySQL Community Edition, Free Tier template
+Step 3: Set DB instance identifier, master username and password
+Step 4: Allocate storage (20GB) and choose default instance class
+Step 5: Enable Public Access and configure Security Group for inbound MySQL (port 3306)
+Step 6: Wait for RDS instance status = Available
+Step 7: Open SQL Workbench → New Connection
+Step 8: Use RDS endpoint, port 3306, username and password to connect
+Step 9: Execute SQL queries:
+
+CREATE DATABASE TestDB;
+USE TestDB;
+CREATE TABLE Students(ID INT PRIMARY KEY, Name VARCHAR(50));
+INSERT INTO Students VALUES(1, 'Alice'), (2, 'Bob');
+SELECT * FROM Students;
+

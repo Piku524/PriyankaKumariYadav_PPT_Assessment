@@ -1,0 +1,116 @@
+Task 4: ASG and ELB in EC2 – Commands and Steps
+
+**Launch EC2 instance
+
+AMI: Ubuntu
+
+Instance type: t2.micro
+
+Security group: allow HTTP (80) and SSH (22)
+
+Connect to instance using SSH
+
+Install web server
+sudo apt update
+sudo apt install nginx -y
+
+**Deploy website
+git clone https://github.com/your-repo/your-project.git
+
+sudo cp -r your-project/* /var/www/html/
+
+Check website
+Open public IP in browser
+
+**Create AMI from instance
+
+EC2 Dashboard → Actions → Image and templates → Create Image
+
+Name: my-web-ami
+
+**Create Launch Template
+
+AMI: my-web-ami
+
+Instance type: t2.micro
+
+Key pair: select key
+
+Security group: allow HTTP and SSH
+
+Create launch template
+
+Create Target Group
+
+Target type: Instances
+
+Protocol: HTTP
+
+Port: 80
+
+IP version: IPv4
+
+Health check protocol: HTTP
+
+Health check path: /
+
+Healthy threshold: 2
+
+Interval: 30 seconds
+
+**Create target group
+
+Create Application Load Balancer
+
+Type: Application Load Balancer
+
+Scheme: Internet-facing
+
+IP address type: IPv4
+
+Select all availability zones
+
+Security group: allow HTTP
+
+Listener: HTTP 80
+
+Attach target group
+
+**Create load balancer
+
+Copy DNS name and open in browser
+
+Create Auto Scaling Group
+
+Select launch template
+
+Select all availability zones
+
+Attach to existing load balancer
+
+Select target group
+
+Health check type: ELB
+
+Capacity settings
+Desired capacity: 2
+Minimum capacity: 1
+Maximum capacity: 5
+
+Scaling policy
+
+Metric type: Average CPU utilization
+
+Target value: 70
+
+Instance warm-up: 200 seconds
+
+Create Auto Scaling Group
+
+**Verification
+
+Check instances launched automatically
+
+Open Load Balancer DNS in browser
+
+Stop one instance and verify new instance launches automatically

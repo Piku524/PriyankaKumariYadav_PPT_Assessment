@@ -1,0 +1,62 @@
+For Windows Instance (Using GPT)
+
+1. Open the EC2 Dashboard.
+
+2. Create a Windows EC2 Instance.
+
+3. Create a new EBS Volume:
+
+   * Size: 10 GB
+   * Availability Zone: Same as the Windows EC2 instance
+
+4. Click Create Volume.
+
+5. Select the created volume.
+
+6. Click Actions → Attach Volume.
+
+7. Select your Windows EC2 instance.
+
+8. Device name (default): `xvdf`.
+
+9. Click Attach.
+
+---
+
+Connect to Windows Instance
+
+10. Connect to the Windows EC2 instance using RDP.
+
+11. Open Server Manager.
+
+12. Click Tools → Disk Management.
+
+---
+
+Initialize Disk (GPT)
+
+13. When prompted to initialize the disk, select the disk.
+
+14. Choose partition style as GPT (GUID Partition Table).
+
+15. Click OK.
+
+Create and Format Volume
+
+16. Right-click on the unallocated space.
+
+17. Select New Simple Volume.
+
+18. Assign a drive letter.
+
+19. Format the volume (NTFS recommended).
+
+20. Click Finish.
+
+---
+
+Final Status
+
+The disk is now initialized using GPT, formatted, and ready to use in Windows.
+
+

@@ -1,0 +1,7 @@
+Task 23: Azure Resource Manager (ARM) & Cost Management
+Objective: View resources and cost summary
+
+Step 1: Open Resource Group ppt-rg → Check all resources (VM, Storage, VNet)
+Step 2: Deploy simple resource if needed (Storage/VM)
+Step 3: Go to 'Cost Management + Billing' → Cost Analysis
+Step 4: Review usage and cost (sandbox shows limited cost)

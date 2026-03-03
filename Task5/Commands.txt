@@ -1,0 +1,57 @@
+Task: Deploy Static Website using S3
+
+Step 1: Create S3 Bucket
+Open AWS Console
+Go to S3 service
+Click "Create bucket"
+Enter unique bucket name
+Select region
+Click "Create bucket"
+
+Step 2: Upload Website Files
+Open the created bucket
+Click "Upload"
+Add files: index.html, style.css, script.js, images.jpg
+Click "Upload"
+
+Step 3: Enable Static Website Hosting
+Go to "Properties" tab of the bucket
+Scroll to "Static website hosting"
+Click "Edit"
+Enable "Static website hosting"
+Select "Host a static website"
+Index document: index.html
+Click "Save changes"
+
+Step 4: Disable Block Public Access
+Go to "Permissions" tab
+Click "Block public access"
+Turn off "Block all public access"
+Click "Save changes" and confirm
+
+Step 5: Add Bucket Policy
+Go to "Permissions" → "Bucket policy"
+Click "Edit"
+Paste the following policy:
+
+{
+"Version": "2012-10-17",
+"Statement": [
+{
+"Sid": "PublicReadGetObject",
+"Effect": "Allow",
+"Principal": "*",
+"Action": "s3:GetObject",
+"Resource": "arn:aws:s3:::your-bucket-name/*"
+}
+]
+}
+
+Click "Save changes"
+
+Step 6: Access Website
+Go to "Properties" → "Static website hosting"
+Copy the "Bucket website endpoint"
+Paste URL in browser
+Verify website loads successfully
+

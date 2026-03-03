@@ -1,0 +1,20 @@
+Step 1: Connect to your EC2 instance via SSH
+Step 2: Update package list
+
+sudo apt update
+
+Step 3: Install CPU stress tool
+
+sudo apt install stress-ng -y
+
+Step 4: Run CPU stress to trigger CloudWatch alarm
+This runs 2 CPU workers for 5 minutes
+
+sudo stress-ng -c 2 --timeout 5m
+
+Step 5: (Optional) Monitor CPU usage
+
+top
+
+Observe CPU spikes; CloudWatch alarm should trigger
+Step 6: After stress test completes, the EC2 instance should stop automatically
