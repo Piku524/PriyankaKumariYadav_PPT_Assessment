@@ -1,0 +1,45 @@
+ASK: Multi-AZ Highly Available Web Application (AWS)
+
+USER DATA SCRIPT (Launch Template)
+
+#!/bin/bash
+yum update -y
+yum install -y httpd awscli
+systemctl start httpd
+systemctl enable httpd
+
+aws s3 sync s3://b220 /var/www/html
+
+CHECK WEB SERVER STATUS
+
+systemctl status httpd
+
+CHECK FILES IN WEB ROOT DIRECTORY
+
+ls /var/www/html
+
+TEST WEBSITE LOCALLY ON EC2
+
+curl localhost
+
+OPTIONAL: COPY FILE FROM S3 MANUALLY
+
+aws s3 cp s3://b220/index.html /var/www/html/
+
+APPLICATION LOAD BALANCER URL
+
+http://myalb-659451638.ap-south-1.elb.amazonaws.com/
+
+CLOUDWATCH ALARM CONFIGURATION
+
+Metric: CPUUtilization
+Threshold: Greater than 70%
+Period: 5 minutes
+
+AUTO SCALING GROUP CONFIGURATION
+
+Minimum Capacity: 2
+Desired Capacity: 2
+Maximum Capacity: 4
+
+========================

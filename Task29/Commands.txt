@@ -1,0 +1,92 @@
+TASK 5 — Serverless + Event-Driven Architecture (AWS + Azure)
+Step 1 — AWS Flow (S3 → Lambda → DynamoDB)
+
+1️⃣ Create S3 Bucket
+Go to AWS Console → S3 → Create bucket
+Bucket name: event-bucket-12345
+Region: ap-south-1
+
+2️⃣ Create DynamoDB Table
+Table name: FileUploads
+Partition key: fileName (String)
+
+3️⃣ Create IAM Role for Lambda
+Role name: lambda-s3-dynamo-role
+Attach policies: AmazonDynamoDBFullAccess, CloudWatchLogsFullAccess, AmazonS3ReadOnlyAccess
+
+4️⃣ Create Lambda Function
+Function name: S3ToDynamoFunction
+Runtime: Python 3.9
+Execution role: lambda-s3-dynamo-role
+
+5️⃣ Lambda Function Code
+import json
+import boto3
+
+dynamodb = boto3.resource('dynamodb')
+table = dynamodb.Table('FileUploads')
+
+def lambda_handler(event, context):
+file_name = event['Records'][0]['s3']['object']['key']
+table.put_item(
+Item={
+'fileName': file_name
+}
+)
+return {
+'statusCode': 200,
+'body': json.dumps('File stored in DynamoDB')
+}
+
+6️⃣ Add S3 Trigger to Lambda
+Go to Lambda → S3ToDynamoFunction → Add trigger
+Trigger type: S3
+Bucket: event-bucket-12345
+Event type: All object create events
+Acknowledge and Add
+
+7️⃣ Test AWS Flow
+Upload a file to S3 bucket → Check DynamoDB table and CloudWatch logs
+
+Step 2 — Azure Flow (Blob → Function → Cosmos DB)
+
+1️⃣ Create Azure Storage Account (Blob)
+Resource group: serverlessRG
+Storage account: blobserverless123
+Region: Central India
+
+2️⃣ Create Cosmos DB
+API: Core (SQL)
+Account name: cosmosserverless123
+Database: FileDB
+Container: Uploads
+Partition key: /fileName
+
+3️⃣ Create Function App
+Function App name: BlobFunctionApp123
+Runtime: Python
+Resource group: serverlessRG
+Storage account: blobserverless123
+
+4️⃣ Add Blob Trigger Function
+Function name: BlobToCosmos
+Trigger type: Blob trigger
+Path: uploads/{name}
+
+5️⃣ Add Cosmos DB Output Binding
+Integration → Add Output → Azure Cosmos DB
+Database: FileDB
+Container: Uploads
+
+6️⃣ Azure Function Code
+import logging
+import azure.functions as func
+
+def main(myblob: func.InputStream, outputDocument: func.Out[func.Document]):
+logging.info(f"Blob name: {myblob.name}")
+outputDocument.set({
+"fileName": myblob.name
+})
+
+7️⃣ Test Azure Flow
+Upload file to Blob container → Check Cosmos DB record and Function logs

@@ -1,0 +1,39 @@
+# ================================
+# TASK 4 - Hybrid Architecture Simulation (AWS)
+# Bastion Host + Private VM Access
+# ================================
+
+# 1. Connect to Bastion Host (Public Subnet)
+ssh -i Kiiy.pem ec2-user@<BASTION_PUBLIC_IP>
+
+# 2. Copy key file to Bastion Host (only once)
+scp -i Kiiy.pem Kiiy.pem ec2-user@<BASTION_PUBLIC_IP>:/home/ec2-user/
+
+# 3. Login again to Bastion Host
+ssh -i Kiiy.pem ec2-user@<BASTION_PUBLIC_IP>
+
+# 4. Set correct permission for key
+chmod 400 Kiiy.pem
+
+# 5. Connect from Bastion Host to Private VM
+ssh -i Kiiy.pem ec2-user@<PRIVATE_VM_PRIVATE_IP>
+
+# Example:
+# ssh -i Kiiy.pem ec2-user@10.0.2.204
+
+# 6. Check OS
+cat /etc/os-release
+
+# 7. Test internet access from Private VM (should fail)
+ping google.com
+
+# 8. Try update (will fail without NAT Gateway)
+sudo yum update
+# or
+sudo dnf update
+
+# 9. Exit Private VM
+exit
+
+# 10. Exit Bastion Host
+exit
